@@ -1,8 +1,10 @@
 /*
  *
+ * Define user specified Event signals and Task priorities here
+ *
  */
 
- #ifndef _ETS_SYS_H
+#ifndef _ETS_SYS_H
 #define _ETS_SYS_H
 
 #include "c_types.h"
@@ -33,7 +35,7 @@ typedef struct _ETSTIMER_ {
 } ETSTimer;
 
 /* interrupt related */
-#define ETS_SPI_INUM	   2
+#define ETS_SPI_INUM	    2
 #define ETS_GPIO_INUM       4
 #define ETS_UART_INUM       5
 #define ETS_UART1_INUM      5
@@ -85,4 +87,3 @@ typedef struct _ETSTIMER_ {
     ETS_INTR_DISABLE(ETS_GPIO_INUM)
 
 #endif /* _ETS_SYS_H */
-
