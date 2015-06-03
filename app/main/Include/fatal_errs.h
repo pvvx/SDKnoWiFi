@@ -9,6 +9,7 @@
 #ifndef _INCLUDE_FATAL_ERRS_H_
 #define _INCLUDE_FATAL_ERRS_H_
 
+#include "c_types.h"
 
 #define RST_EVENT_WDT 1
 #define RST_EVENT_RES 8
