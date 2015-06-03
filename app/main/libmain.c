@@ -40,3 +40,13 @@ void ICACHE_FLASH_ATTR uart_wait_tx_fifo_empty(void)
 	while((UART1_STATUS >> UART_TXFIFO_CNT_S) & UART_TXFIFO_CNT);
 }
 
+void go_deep_sleep(void)
+{
+	ets_intr_lock();
+	Cache_Read_Disable();
+	SPI0_CMD = 0x200000;
+	while(SPI0_CMD);
+	IO_RTC_2 = 1<<20; // rtc_enter_sleep()	HWREG(PERIPHS_RTC_BASEADDR, 0x08) = 0x100000;
+	while(1);
+}
+

@@ -28,7 +28,7 @@ void store_exception_error(uint32_t errn)
 			*ptr++ = RSR(EPC3);
 			*ptr++ = RSR(EXCVADDR);
 			*ptr++ = RSR(DEPC);
-		if(errn > RST_EVENT_RES) do _ResetVector(); while(1);
+		if(errn > RST_EVENT_WDT) _ResetVector();
 }
 
 // каждые 1680403 us
@@ -46,8 +46,8 @@ void ICACHE_FLASH_ATTR wdt_task(ETSEvent *e)
 	ets_intr_lock();
 	if(wdt_flg) {
 		wdt_flg = false;
-		if (RTC_MEM(0) < RST_EVENT_RES) RTC_MEM(0) = 0;
 		WDT_FEED = WDT_FEED_MAGIC;
+		if (RTC_MEM(0) <= RST_EVENT_WDT) RTC_MEM(0) = 0;
 	}
 	ets_intr_unlock();
 }
@@ -85,7 +85,7 @@ void fatal_error(uint32_t errn, void *addr, void *txt)
 void ICACHE_FLASH_ATTR os_print_reset_error(void)
 {
 	struct rst_info * rst_info = (struct rst_info *)(&RTC_MEM(0));
-	if(rst_info->flag >= RST_EVENT_WDT && rst_info->flag <= RST_EVENT_EXP) {
+	if(rst_info->flag >= RST_EVENT_WDT && rst_info->flag <= RST_EVENT_MAX) {
 		os_printf("Old reset: ");
 		switch(rst_info->flag) {
 		case RST_EVENT_WDT:
@@ -105,7 +105,7 @@ void ICACHE_FLASH_ATTR os_print_reset_error(void)
 		default: {
 			char * txt = (char *)rst_info->epc1;
 			if(txt == NULL) txt = aNull;
-			os_printf("Error (%u): addr=0x%08x,", rst_info->flag, rst_info->exccause);
+			os_printf("Error (%u): addr=0x%08x, ", rst_info->flag, rst_info->exccause);
 			os_printf_plus(txt);
 			os_printf("\n");
 			}

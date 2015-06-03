@@ -14,6 +14,7 @@
 #define RST_EVENT_DEEP_SLEEP 4
 #define RST_EVENT_RES 8
 #define FATAL_ERR_R6PHY 9 // "register_chipv6_phy"
+#define FATAL_ERR_DPSLP 10 // "sys_deep_sleep"
 #define RST_EVENT_MAX 32
 
 void fatal_error(uint32_t errn, void *addr, void *txt);

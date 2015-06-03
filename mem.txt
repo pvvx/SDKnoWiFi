@@ -1,10 +1,1 @@
-   Section|                   Description| Start (hex)|   End (hex)|Used space
-------------------------------------------------------------------------------
-      data|        Initialized Data (RAM)|    3FFE8000|    3FFE8000|       0
-    rodata|           ReadOnly Data (RAM)|    3FFE8000|    3FFE8004|       4
-       bss|      Uninitialized Data (RAM)|    3FFE8008|    3FFE8030|      40
-      text|            Cached Code (IRAM)|    40100000|    4010037C|     892
-irom0_text|           Uncached Code (SPI)|    40240000|    40240548|    1352
-Total Used RAM : 44
-Free RAM : 81876
-Free IRam : 31894
+Please ensure app.out file location is correct: .\app\.output\eagle\image\eagle.app.v6.out

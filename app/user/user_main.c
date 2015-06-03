@@ -4,8 +4,11 @@
 #include "user_interface.h"
 #include "bios.h"
 #include "hw/esp8266.h"
+#include "../main/include/fatal_errs.h"
 
 extern uint8_t _bss_start, _bss_end;
+
+extern void sys_deep_sleep(uint32 timer_arg) ICACHE_FLASH_ATTR;
 
 void ICACHE_FLASH_ATTR user_init(void)
 {
@@ -13,7 +16,7 @@ void ICACHE_FLASH_ATTR user_init(void)
 	os_memset(buf, 0, sizeof(buf));
 	os_sprintf(buf, "Test 'SDK no WiFi'\n");
 	os_printf("%sHeap size:\t%u bytes\nBss size:\t%u bytes\nStack pointer:\t%p\n", buf, xPortGetFreeHeapSize(), &_bss_end - &_bss_start, &buf[32] );
-	uint32 t1 = system_get_time();
+/*	uint32 t1 = system_get_time();
 	ets_delay_us(1000);
 	uint32 t2 = system_get_time();
 	os_printf("ets_delay_us(1000) dt=%u\n", t2-t1);
@@ -24,6 +27,6 @@ void ICACHE_FLASH_ATTR user_init(void)
 	t1 = system_get_time();
 	ets_delay_us(100000);
 	t2 = system_get_time();
-	os_printf("ets_delay_us(100000) dt=%u\n", t2-t1);
-
+	os_printf("ets_delay_us(100000) dt=%u\n", t2-t1); */
+	sys_deep_sleep(50000);
 }
