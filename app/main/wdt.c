@@ -58,7 +58,7 @@ void ICACHE_FLASH_ATTR wdt_init(void)
 	ets_task(wdt_task, WDT_TASK_PRIO, &wdt_eventq, 1);
 	ets_isr_attach(ETS_WDT_INUM , wdt_feed, NULL);
 	INTC_EDGE_EN |= 1; // 0x3ff00004 |= 1
-	ets_wdt_enable(2,3,3); // 1680403 us
+	ets_wdt_enable(2,3,3); // mode 2 (wdt isr), step 1680403 us
 }
 
 void default_exception_handler(void)
