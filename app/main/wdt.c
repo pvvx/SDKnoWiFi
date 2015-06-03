@@ -87,18 +87,28 @@ void ICACHE_FLASH_ATTR os_print_reset_error(void)
 	struct rst_info * rst_info = (struct rst_info *)(&RTC_MEM(0));
 	if(rst_info->flag >= RST_EVENT_WDT && rst_info->flag <= RST_EVENT_EXP) {
 		os_printf("Old reset: ");
-		if(rst_info->flag == RST_EVENT_WDT) {
+		switch(rst_info->flag) {
+		case RST_EVENT_WDT:
 			os_printf("WDT (%d):\n", rst_info->exccause);
 			os_printf_plus((const char *)aEpc10x08xEpc20, rst_info->epc1, rst_info->epc2, rst_info->epc3, rst_info->excvaddr, rst_info->depc);
-		}
-		else if(rst_info->flag == RST_EVENT_EXP) {
+			break;
+		case RST_EVENT_EXP:
 			os_printf_plus((const char *)aFatalException, rst_info->exccause);
 			os_printf_plus((const char *)aEpc10x08xEpc20, rst_info->epc1, rst_info->epc2, rst_info->epc3, rst_info->excvaddr, rst_info->depc);
-		}
-		else {
+			break;
+		case RST_EVENT_SOFT_RESET:
+			os_printf("SoftReset\n");
+			break;
+		case RST_EVENT_DEEP_SLEEP:
+			os_printf("Deep_Sleep\n");
+			break;
+		default: {
 			char * txt = (char *)rst_info->epc1;
 			if(txt == NULL) txt = aNull;
-			os_printf("Error (%u): addr=0x%08x, %s\n", rst_info->flag, rst_info->exccause, txt);
+			os_printf("Error (%u): addr=0x%08x,", rst_info->flag, rst_info->exccause);
+			os_printf_plus(txt);
+			os_printf("\n");
+			}
 		}
 	}
 	rst_info->flag = 0;
