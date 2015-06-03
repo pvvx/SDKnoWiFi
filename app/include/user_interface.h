@@ -32,6 +32,7 @@ void call_user_start(void);
 #define SYS_CPU_160MHZ	160
 
 void fatal_error(uint32_t errn, void *addr, void *txt);
+void sys_deep_sleep(uint32 time_us) ICACHE_FLASH_ATTR;
 
 
 #endif
