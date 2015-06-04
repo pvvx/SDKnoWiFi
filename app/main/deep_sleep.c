@@ -1,7 +1,7 @@
 /*
  * deep_sleep.c
  *
- *  Created on: 03 июня 2015 г.
+ *  Created on: 03 РёСЋРЅСЏ 2015 Рі.
  *      Author: PVV
  */
 #include "user_config.h"

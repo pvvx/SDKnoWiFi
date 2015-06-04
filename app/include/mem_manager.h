@@ -1,7 +1,7 @@
 #ifndef __MEM_H__
 #define __MEM_H__
 
-// в модуле mem_manager.o
+// РІ РјРѕРґСѓР»Рµ mem_manager.o
 
 void *pvPortMalloc( size_t xWantedSize );
 void vPortFree( void *pv );

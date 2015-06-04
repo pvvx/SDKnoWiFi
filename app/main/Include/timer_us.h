@@ -1,7 +1,7 @@
 /*
  * timer_us.h
  *
- *  Created on: 13 мая 2015 г.
+ *  Created on: 13 РјР°СЏ 2015 Рі.
  *      Author: PVV
  */
 

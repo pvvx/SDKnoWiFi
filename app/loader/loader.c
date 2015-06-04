@@ -22,36 +22,36 @@ extern void startup(void);
 //=============================================================================
 // IRAM code
 //=============================================================================
-// call_user_start() - вызов из заголовка, загрузчиком
+// call_user_start() - РІС‹Р·РѕРІ РёР· Р·Р°РіРѕР»РѕРІРєР°, Р·Р°РіСЂСѓР·С‡РёРєРѕРј
 // ENTRY(call_user_start) in eagle.app.v6.ld
 //-----------------------------------------------------------------------------
 void call_user_start(void)
 {
-	    // Загрзука заголовка flash
+	    // Р—Р°РіСЂР·СѓРєР° Р·Р°РіРѕР»РѕРІРєР° flash
 	    struct SPIFlashHead fhead;
-		SPI0_USER |= SPI_CS_SETUP; // +1 такт перед CS
+		SPI0_USER |= SPI_CS_SETUP; // +1 С‚Р°РєС‚ РїРµСЂРµРґ CS
 		SPIRead(0, (uint32_t *)&fhead, sizeof(fhead));
-		// Установка размера Flash от 256Kbytes до 32Mbytes
+		// РЈСЃС‚Р°РЅРѕРІРєР° СЂР°Р·РјРµСЂР° Flash РѕС‚ 256Kbytes РґРѕ 32Mbytes
 		// High four bits fhead.hsz.flash_size: 0 = 512K, 1 = 256K, 2 = 1M, 3 = 2M, 4 = 4M, ... 7 = 32M
 	    uint32 fsize = fhead.hsz.flash_size & 7;
 		if(fsize < 2) flashchip->chip_size = (8 >> fsize) << 16;
 		else flashchip->chip_size = (4 << fsize) << 16;
 	    uint32 fspeed = fhead.hsz.spi_freg;
-		// Установка:
+		// РЈСЃС‚Р°РЅРѕРІРєР°:
 		// SPI Flash Interface (0 = QIO, 1 = QOUT, 2 = DIO, 0x3 = DOUT)
 		// and Speed QSPI: 0 = 40MHz, 1= 26MHz, 2 = 20MHz, ... = 80MHz
 		sflash_something(fspeed);
 		// SPIFlashCnfig(fhead.spi_interface & 3, (speed > 2)? 1 : speed + 2);
 		// SPIReadModeCnfig(5); // in ROM
-		// Всё - включаем кеширование, далее можно вызывать процедуры из flash
+		// Р’СЃС‘ - РІРєР»СЋС‡Р°РµРј РєРµС€РёСЂРѕРІР°РЅРёРµ, РґР°Р»РµРµ РјРѕР¶РЅРѕ РІС‹Р·С‹РІР°С‚СЊ РїСЂРѕС†РµРґСѓСЂС‹ РёР· flash
 		Cache_Read_Enable(0,0,1);
-		// Инициализация
+		// РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ
 		startup();
-		// Передача управления ROM-BIOS
+		// РџРµСЂРµРґР°С‡Р° СѓРїСЂР°РІР»РµРЅРёСЏ ROM-BIOS
 		ets_run();
 }
 //-----------------------------------------------------------------------------
-// Установка скорости QSPI
+// РЈСЃС‚Р°РЅРѕРІРєР° СЃРєРѕСЂРѕСЃС‚Рё QSPI
 //  0 = 40MHz, 1 = 26MHz, 2 = 20MHz, >2 = 80MHz
 //-----------------------------------------------------------------------------
 void sflash_something(uint32 flash_speed)

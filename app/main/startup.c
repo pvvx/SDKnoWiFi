@@ -34,7 +34,7 @@ extern void call_user_start(void);
 void ICACHE_FLASH_ATTR startup(void)
 {
 	ets_set_user_start(call_user_start);
-	// Очистка сегмента bss //	mem_clr_bss();
+	// РћС‡РёСЃС‚РєР° СЃРµРіРјРµРЅС‚Р° bss //	mem_clr_bss();
 	uint8 * ptr = &_bss_start;
 	while(ptr < &_bss_end) *ptr++ = 0;
 	//
@@ -64,12 +64,12 @@ void ICACHE_FLASH_ATTR startup(void)
 #ifdef DEBUG_UART
 	os_printf("\nOpenLoaderSDK v1.3\n");
 	//
-	os_print_reset_error(); // print fatal errors/restart вывод фатальных ошибок, вызвавших рестарт. см. в модуле wdt
+	os_print_reset_error(); // print fatal errors/restart РІС‹РІРѕРґ С„Р°С‚Р°Р»СЊРЅС‹С… РѕС€РёР±РѕРє, РІС‹Р·РІР°РІС€РёС… СЂРµСЃС‚Р°СЂС‚. СЃРј. РІ РјРѕРґСѓР»Рµ wdt
 #endif
 	//
 	wdt_init();
 	//
-	vPortFree(pvPortMalloc(8)); // init mem_manager иначе не работает xPortGetFreeHeapSize()
+	vPortFree(pvPortMalloc(8)); // init mem_manager РёРЅР°С‡Рµ РЅРµ СЂР°Р±РѕС‚Р°РµС‚ xPortGetFreeHeapSize()
 	//
 	user_init();
 	//

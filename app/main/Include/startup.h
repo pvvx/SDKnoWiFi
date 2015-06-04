@@ -1,14 +1,14 @@
 /*
  * startup.h
  *
- *  Created on: 13 мая 2015 г.
+ *  Created on: 13 РјР°СЏ 2015 Рі.
  *      Author: PVV
  */
 
 #ifndef _INCLUDE_STARTUP_H_
 #define _INCLUDE_STARTUP_H_
 
-#define DEBUG_UART 0 // включить вывод в загрузчике сообщений
+#define DEBUG_UART 0 // РІРєР»СЋС‡РёС‚СЊ РІС‹РІРѕРґ РІ Р·Р°РіСЂСѓР·С‡РёРєРµ СЃРѕРѕР±С‰РµРЅРёР№
 
 void startup(void) ICACHE_FLASH_ATTR;
 

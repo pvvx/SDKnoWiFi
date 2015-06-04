@@ -31,7 +31,7 @@ void store_exception_error(uint32_t errn)
 		if(errn > RST_EVENT_WDT) _ResetVector();
 }
 
-// каждые 1680403 us
+// РєР°Р¶РґС‹Рµ 1680403 us
 void wdt_feed(void)
 {
 	if (RTC_MEM(0) <= RST_EVENT_WDT) {

@@ -8,7 +8,7 @@
 #include "bios.h"
 #include <stdarg.h>
 
-//extern uint8 _mem_buf[2924]; // пустой буфер в области RAM_BIOS: 0x3FFFE360..0x3FFFEA80 [1824 байт]
+//extern uint8 _mem_buf[2924]; // РїСѓСЃС‚РѕР№ Р±СѓС„РµСЂ РІ РѕР±Р»Р°СЃС‚Рё RAM_BIOS: 0x3FFFE360..0x3FFFEA80 [1824 Р±Р°Р№С‚]
 extern char * _sprintf_buf;  // 0x3FFFE360
 extern char print_mem_buf[1820]; // 0x3FFFE364..0x3FFFEA80
 //=============================================================================
@@ -16,7 +16,7 @@ extern char print_mem_buf[1820]; // 0x3FFFE364..0x3FFFEA80
 //=============================================================================
 //=============================================================================
 // int os_printf_plus(const char *format, ...)
-// Использует буфер в области RAM-BIOS
+// РСЃРїРѕР»СЊР·СѓРµС‚ Р±СѓС„РµСЂ РІ РѕР±Р»Р°СЃС‚Рё RAM-BIOS
 //-----------------------------------------------------------------------------
 int ICACHE_FLASH_ATTR os_printf_plus(const char *format, ...)
 {
@@ -28,7 +28,7 @@ int ICACHE_FLASH_ATTR os_printf_plus(const char *format, ...)
 }
 //=============================================================================
 // int os_sprintf_plus(char *str, const char *format, ...)
-// Использует буфер в области RAM-BIOS
+// РСЃРїРѕР»СЊР·СѓРµС‚ Р±СѓС„РµСЂ РІ РѕР±Р»Р°СЃС‚Рё RAM-BIOS
 //-----------------------------------------------------------------------------
 void ICACHE_FLASH_ATTR _sprintf_out(char c)
 {

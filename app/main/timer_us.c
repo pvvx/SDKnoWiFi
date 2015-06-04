@@ -41,7 +41,7 @@ void ICACHE_FLASH_ATTR ets_timer_arm_us(ETSTimer *ptimer, uint32_t us_ms, int re
 /*
 // ------------------------------------------------------
 // system_timer_init_us
-// устанавливает делитель таймера на :16 вместо :256
+// СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ РґРµР»РёС‚РµР»СЊ С‚Р°Р№РјРµСЂР° РЅР° :16 РІРјРµСЃС‚Рѕ :256
 void ICACHE_FLASH_ATTR system_timer_init_us(void)
 {
 	TIMER1_CTRL = 0x84;
