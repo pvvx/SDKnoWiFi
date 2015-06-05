@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010 Espressif System
+ * OSAPI.h
  */
 
 #ifndef _OSAPI_H_

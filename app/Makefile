@@ -19,7 +19,7 @@ ifndef PDIR # {
 GEN_IMAGES= eagle.app.v6.out
 GEN_BINS = eagle.app.v6.bin
 SUBDIRS=  loader  \
-	main	\
+	sys	\
 	user
 endif # } PDIR
 
@@ -29,7 +29,7 @@ LDDIR = ../ld
 LD_FILE = $(LDDIR)/eagle.app.v6.ld
 
 COMPONENTS_eagle.app.v6 = \
-	main/libaddmmain.a	\
+	sys/libsys.a	\
 	loader/libloader.a	\
 	user/libuser.a
 

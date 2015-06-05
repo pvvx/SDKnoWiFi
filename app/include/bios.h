@@ -1,12 +1,13 @@
 /******************************************************************************
  * FileName: bios.h
  * Description: funcs in ROM-BIOS
- * Alternate SDK ver 0.0.0 (b0)
+ * Alternate SDK 
  * Author: PV`
  * (c) PV` 2015
 *******************************************************************************/
 #ifndef _INCLUDE_BIOS_H_
 #define _INCLUDE_BIOS_H_
+
 #include "bios/spiflash.h"
 #include "bios/cha1.h"
 #include "bios/ets.h"

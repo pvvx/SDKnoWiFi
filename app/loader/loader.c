@@ -3,17 +3,12 @@
  * Description: Alternate SDK (libmain.a)
  * Author: PV`
  * (c) PV` 2015
- * ver 0.0.0 (b0)
 *******************************************************************************/
 #include "user_config.h"
 #include "bios.h"
-//#include "user_interface.h"
 #include "hw/esp8266.h"
 #include "hw/spi_register.h"
-//#include "fatal_errs.h"
-//#include "app_main.h"
-#include "flash.h"
-#include "loader.h"
+#include "sys/loader.h"
 
 //=============================================================================
 // extern funcs

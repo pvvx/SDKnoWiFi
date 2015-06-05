@@ -1,14 +1,8 @@
 /******************************************************************************
 *******************************************************************************/
 
-#include "user_interface.h"
-#include "bios.h"
-#include "hw/esp8266.h"
-#include "../main/include/fatal_errs.h"
+#include "system.h"
 
-extern uint8_t _bss_start, _bss_end;
-
-extern void sys_deep_sleep(uint32 timer_arg) ICACHE_FLASH_ATTR;
 
 void ICACHE_FLASH_ATTR user_init(void)
 {
