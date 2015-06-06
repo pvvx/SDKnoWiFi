@@ -22,7 +22,7 @@ LD := $(XTENSA_TOOLS_ROOT)/xtensa-lx106-elf-gcc
 NM := $(XTENSA_TOOLS_ROOT)/xtensa-lx106-elf-nm
 CPP = $(XTENSA_TOOLS_ROOT)/xtensa-lx106-elf-cpp
 OBJCOPY = $(XTENSA_TOOLS_ROOT)/xtensa-lx106-elf-objcopy
-CCFLAGS += -Os -Wall -Wno-pointer-sign -fno-tree-ccp -mno-target-align -mno-serialize-volatile -foptimize-register-move
+CCFLAGS += -O2 -Wall -Wno-pointer-sign -fno-tree-ccp -mno-target-align -mno-serialize-volatile -foptimize-register-move
 #
 # -Wall -Wno-pointer-sign -mno-target-align -mno-serialize-volatile -foptimize-register-move
 # -fomit-frame-pointer -fmerge-all-constants
