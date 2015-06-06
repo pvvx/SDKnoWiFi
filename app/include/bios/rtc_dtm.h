@@ -58,12 +58,18 @@ void save_rxbcn_mactime(uint32 t);
 void save_tsf_us(uint32 us);
 void dtm_set_intr_mask(uint32 mask);
 uint32 dtm_get_intr_mask(void);
-void dtm_params_init(void * sleep_func, void * int_func);
-void dtm_set_params(int mode, int time_ms_a3, int a4, int cycles, int a6);
+/* назначить функцию on_wait_func_cb() до входа в sleep в ets_run()
+  и функцию off_wait_func_cb() после выхода из sleep в ets_run()  */
+void dtm_params_init(void * on_wait_func_cb, void * off_wait_func_cb);
+/* mode - 0,  time_ms - время sleep в ms, cycles - кол-во циклов в ets_run() */
+void dtm_set_params(int mode, int time_ms, int a4, int cycles, int a6);
 void rtc_intr_handler(void);
+/* переход в режим sleep (один цикл) */
 void rtc_enter_sleep(void);
+/* установить прерывание rtc - rtc_intr_handler() */
 void ets_rtc_int_register(void);
-/* { ets_set_idle_cb(rtc_enter_sleep, 0); } */
+/* назначить исполнение sleep в ets_run()
+  { ets_set_idle_cb(rtc_enter_sleep, 0); } */
 void ets_enter_sleep(void); 
 
 #endif /* _BIOS_RTC_DTM_H_ */

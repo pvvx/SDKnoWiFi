@@ -21,6 +21,7 @@ uint32 ICACHE_FLASH_ATTR pm_usec2rtc(uint32 us, uint32 cf)
 	return (us/cf) << 12;
 }
 
+// полный sleep, с перезагрузкуой
 void ICACHE_FLASH_ATTR sys_deep_sleep(uint32 time_us)
 {
 	os_printf("sys_deep_sleep %u us...\n", time_us);

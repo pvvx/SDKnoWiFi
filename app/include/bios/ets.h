@@ -133,7 +133,8 @@ void eprintf_init_buf(void * x);
 int eprintf(const char *format, ...);
 /* eprintf_buf sip_send() */
 int eprintf_to_host(void);
-void ets_rtc_int_register(void); //
+/* установить прерывание rtc - rtc_intr_handler() для sleep */
+// void ets_rtc_int_register(void); // перенесено в rtc_dtm.h
 /* Inpyt: char hex, Outpyt: 4bit, return <= 0 - no hex */
 int ets_char2xdigit(char asci);
 /* Inpyt: char *str_mac [' ' or '\t']xx:xx:xx:xx:xx:xx, Outpyt: mac[6], return != 0 - Ok   */
