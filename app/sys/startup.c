@@ -28,10 +28,6 @@ extern void call_user_start(void);
 //-----------------------------------------------------------------------------
 void ICACHE_FLASH_ATTR startup(void)
 {
-	ets_set_user_start(call_user_start);
-	// Очистка сегмента bss //	mem_clr_bss();
-	uint8 * ptr = &_bss_start;
-	while(ptr < &_bss_end) *ptr++ = 0;
 	//
 	if(rom_i2c_readReg(103,4,1) == 8) { // 8: 40MHz, 136: 26MHz
 			// set 80MHz PLL CPU (Q = 26MHz)
@@ -54,6 +50,13 @@ void ICACHE_FLASH_ATTR startup(void)
 //			ets_update_cpu_frequency(80); // set clk cpu (rom-bios set default 80)
 	}
 	//
+	IO_RTC_4 = 0; // отключить WiFi
+	//
+	Select_CLKx2();
+	// Очистка сегмента bss //	mem_clr_bss();
+	uint8 * ptr = &_bss_start;
+	while(ptr < &_bss_end) *ptr++ = 0;
+	//
 	_xtos_set_exception_handler(9, default_exception_handler);
 	_xtos_set_exception_handler(0, default_exception_handler);
 	_xtos_set_exception_handler(2, default_exception_handler);
@@ -63,9 +66,7 @@ void ICACHE_FLASH_ATTR startup(void)
 	_xtos_set_exception_handler(8, default_exception_handler);
 	//
 	ets_timer_init();
-#ifdef USE_US_TIMER
 	system_timer_init_us();
-#endif
 	// print sdk version
 #ifdef DEBUG_UART
 	os_printf("\nOpenLoaderSDK v1.3\n");
@@ -74,6 +75,8 @@ void ICACHE_FLASH_ATTR startup(void)
 #endif
 	//
 	wdt_init();
+	//
+	ets_set_user_start(call_user_start);
 	//
 	vPortFree(pvPortMalloc(8)); // init mem_manager иначе не работает xPortGetFreeHeapSize(), pvPortMalloc() содержит инициализацию
 	//

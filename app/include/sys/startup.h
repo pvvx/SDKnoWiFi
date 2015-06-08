@@ -8,7 +8,7 @@
 #ifndef _INCLUDE_STARTUP_H_
 #define _INCLUDE_STARTUP_H_
 
-#define DEBUG_UART 0 // включить вывод в загрузчике сообщений
+#define DEBUG_UART 115200 // включить вывод в загрузчике сообщений
 
 void startup(void) ICACHE_FLASH_ATTR;
 

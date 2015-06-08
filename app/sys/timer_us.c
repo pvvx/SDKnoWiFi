@@ -5,9 +5,6 @@
  * (c) PV` 2015
 *******************************************************************************/
 #include "user_config.h"
-
-#ifdef USE_US_TIMER
-
 #include "bios/ets.h"
 #include "hw/eagle_soc.h"
 #include "sys/timer_us.h"
@@ -50,4 +47,3 @@ void ICACHE_FLASH_ATTR system_timer_init_us(void)
 }
 */
 
-#endif // USE_US_TIMER
