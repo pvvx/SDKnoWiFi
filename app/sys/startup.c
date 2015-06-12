@@ -52,7 +52,10 @@ void ICACHE_FLASH_ATTR startup(void)
 	//
 	IO_RTC_4 = 0; // отключить WiFi
 	//
+#if 1
 	Select_CLKx2();
+	ets_update_cpu_frequency(160);
+#endif
 	// Очистка сегмента bss //	mem_clr_bss();
 	uint8 * ptr = &_bss_start;
 	while(ptr < &_bss_end) *ptr++ = 0;

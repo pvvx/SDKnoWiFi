@@ -352,9 +352,13 @@ typedef enum {
 #define	NOW()			TIMER1_COUNT // FRC2_COUNT
 
 /* WDT:0x60000900 registers */
+/* WDT_CTRL:0x60000900 registers */
 #define WDT_CTRL		wdt_[0]
+/* WDT_REG1:0x60000904 registers */
 #define WDT_REG1		wdt_[1]
+/* WDT_REG2:0x60000908 registers */
 #define WDT_REG2		wdt_[2]
+/* WDT_FEED:0x60000914 registers */
 #define WDT_FEED		wdt_[5]
 #define WDT_FEED_MAGIC	0x73
 
@@ -412,7 +416,7 @@ typedef enum {
 //0x6000070C
 #define IO_RTC_3				rtc_[3]
 //0x60000710
-#define IO_RTC_4				rtc_[4] // rtc_enter_sleep() = 0;
+#define IO_RTC_4				rtc_[4] // в rtc_enter_sleep() (IO_RTC_4 = 0 отключить WiFi)
 //0x60000714
 #define IO_RTC_5				rtc_[5]	// bitrtc_get_reset_reason()
 //0x60000718

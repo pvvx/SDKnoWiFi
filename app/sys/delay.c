@@ -10,6 +10,12 @@
 #include "hw/esp8266.h"
 #include "sys/delay.h"
 
+#define XS_TO_RTC_TIMER_TICKS(t, prescaler, period)	\
+     (((t) > (0xFFFFFFFF/(APB_CLK_FREQ >> prescaler))) ?	\
+      (((t) >> 2) * ((APB_CLK_FREQ >> prescaler)/(period>>2)) + ((t) & 0x3) * ((APB_CLK_FREQ >> prescaler)/period))  :	\
+      (((t) * (APB_CLK_FREQ >> prescaler)) / period))
+
+
 void ICACHE_FLASH_ATTR delay_timer0_isr(bool * flag)
 {
 	*flag = false;
@@ -28,13 +34,17 @@ void ICACHE_FLASH_ATTR sys_delay_us(uint32 us)
 		fatal_error(FATAL_ERR_DELAY, sys_delay_us, (void *)sys_delay_us_err);
 	}
 	volatile bool flag_ok = true;
-    TIMER0_LOAD = us*5 - 9;
+#if ((APB_CLK_FREQ>>4)%1000000)
+    TIMER0_LOAD = XS_TO_RTC_TIMER_TICKS(us, 4, 1000) - 6;
+#else
+    TIMER0_LOAD = (us * ((APB_CLK_FREQ>>4)/1000000)) - 6; // = (us * 5) - 6
+#endif
     TIMER0_CTRL = TM_DIVDED_BY_16 | TM_ENABLE_TIMER | TM_EDGE_INT;
-    if((INTC_EDGE_EN & BIT(1)) == 0) {
+//    if((INTC_EDGE_EN & BIT(1)) == 0) {
         ets_isr_attach(ETS_FRC_TIMER0_INUM, delay_timer0_isr, (void *) &flag_ok);
         INTC_EDGE_EN |= BIT(1);
         ets_isr_unmask(BIT(ETS_FRC_TIMER0_INUM));
-    }
+//    }
 	while(flag_ok)	{
 		asm volatile ("waiti 0");
 	}

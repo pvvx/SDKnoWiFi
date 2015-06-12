@@ -19,8 +19,10 @@
 #define MACSTR "%02x:%02x:%02x:%02x:%02x:%02x"
 #endif
 
-#define system_get_time() (*((volatile unsigned int *)(0x3FF20C00)))
-#define system_get_rtc_time  IO_RTC_SLP_CNT_VAL
+#define system_get_time() (*((volatile unsigned int *)(0x3FF20C00))) // io2_regs_[768]
+#define system_get_rtc_time()  IO_RTC_SLP_CNT_VAL
+#define system_get_timer_time()  TIMER1_COUNT
+#define system_get_cpu_clk_count()  xthal_get_ccount()
 
 #define SYS_CPU_80MHZ	80
 #define SYS_CPU_160MHZ	160
