@@ -9,7 +9,14 @@
 #include "hw/esp8266.h"
 #include "hw/spi_register.h"
 #include "sys/loader.h"
-
+//=============================================================================
+// define
+//-----------------------------------------------------------------------------
+#ifdef USE_MAX_IRAM
+#define Cache_Read_Enable_def() Cache_Read_Enable(0, 0, 0)
+#else
+#define Cache_Read_Enable_def() Cache_Read_Enable(0, 0, 1)
+#endif
 //=============================================================================
 // extern funcs
 //-----------------------------------------------------------------------------
@@ -39,7 +46,7 @@ void call_user_start(void)
 		// SPIFlashCnfig(fhead.spi_interface & 3, (speed > 2)? 1 : speed + 2);
 		// SPIReadModeCnfig(5); // in ROM
 		// Всё - включаем кеширование, далее можно вызывать процедуры из flash
-		Cache_Read_Enable(0,0,1);
+		Cache_Read_Enable_def();
 		// Инициализация
 		startup();
 		// Передача управления ROM-BIOS

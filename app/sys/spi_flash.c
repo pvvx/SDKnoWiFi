@@ -11,6 +11,15 @@
 #include "hw/spi_register.h"
 #include "sys/spi_flash.h"
 
+//=============================================================================
+// define
+//-----------------------------------------------------------------------------
+#ifdef USE_MAX_IRAM
+#define Cache_Read_Enable_def() Cache_Read_Enable(0, 0, 0)
+#else
+#define Cache_Read_Enable_def() Cache_Read_Enable(0, 0, 1)
+#endif
+//-----------------------------------------------------------------------------
 #define SPI_FBLK 32
 /******************************************************************************
  * FunctionName : spi_flash_read
@@ -71,7 +80,7 @@ SpiFlashOpResult __attribute__((optimize("O3"))) spi_flash_read(uint32 faddr, vo
 				break;
 			}
 		}
-		Cache_Read_Enable(0, 0, 1);
+		Cache_Read_Enable_def();
 	}
 	return SPI_FLASH_RESULT_OK;
 }
@@ -87,7 +96,7 @@ uint32 spi_flash_get_id(void)
 	SPI0_CMD = SPI_RDID; // 0x60000200 = 0x10000000
 	while (SPI0_CMD);
 	uint32_t id = SPI0_W0 & 0xffffff;
-	Cache_Read_Enable(0, 0, 1);
+	Cache_Read_Enable_def();
 	return id;
 }
 /******************************************************************************
@@ -98,7 +107,7 @@ SpiFlashOpResult spi_flash_read_status(uint32_t * sta)
 {
 	Cache_Read_Disable();
 	uint32 ret = SPI_read_status(flashchip, sta);
-	Cache_Read_Enable(0, 0, 1);
+	Cache_Read_Enable_def();
 	return ret;
 }
 /******************************************************************************
@@ -109,7 +118,7 @@ SpiFlashOpResult spi_flash_write_status(uint32_t sta)
 {
 	Cache_Read_Disable();
 	SpiFlashOpResult ret = SPI_write_status(flashchip, sta);
-	Cache_Read_Enable(0, 0, 1);
+	Cache_Read_Enable_def();
 	return ret;
 }
 /******************************************************************************
@@ -122,7 +131,7 @@ SpiFlashOpResult spi_flash_erase_sector(uint16 sec)
 	open_16m();
 	SpiFlashOpResult ret = SPIEraseSector(sec);
 	close_16m();
-	Cache_Read_Enable(0, 0, 1);
+	Cache_Read_Enable_def();
 	return ret;
 }
 /******************************************************************************
@@ -137,7 +146,7 @@ SpiFlashOpResult spi_flash_write(uint32 des_addr, uint32 *src_addr, uint32 size)
 	open_16m();
 	SpiFlashOpResult ret = SPIWrite(des_addr, (uint32_t *) src_addr, size);
 	close_16m();
-	Cache_Read_Enable(0, 0, 1);
+	Cache_Read_Enable_def();
 	return ret;
 }
 /******************************************************************************
@@ -150,7 +159,7 @@ SpiFlashOpResult spi_flash_erase_block(uint32 blk)
 	open_16m();
 	SpiFlashOpResult ret = SPIEraseBlock(blk);
 	close_16m();
-	Cache_Read_Enable(0,0,1);
+	Cache_Read_Enable_def();
 	return ret;
 }
 /******************************************************************************

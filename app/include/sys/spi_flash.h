@@ -9,6 +9,7 @@
 #ifndef SPI_FLASH_H
 #define SPI_FLASH_H
 
+#include "user_config.h"
 #include "bios/spiflash.h"
 
 #define SPI_FLASH_SEC_SIZE      4096
