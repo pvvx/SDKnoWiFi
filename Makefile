@@ -4,7 +4,7 @@
 #
 #############################################################
 
-ESPOPTION ?= -p COM6 -b 256000
+ESPOPTION ?= -p COM2 -b 230400
 
 GENIMAGEOPTION = -ff 80m -fm qio -fs 4m
 

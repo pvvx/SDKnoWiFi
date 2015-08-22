@@ -30,7 +30,7 @@
  * Returns      : SpiFlashOpResult 0 - ok
  * Опции gcc: -mno-serialize-volatile !
  *******************************************************************************/
-SpiFlashOpResult __attribute__((optimize("O3"))) spi_flash_read(uint32 faddr, void *des, uint32 size)
+SpiFlashOpResult __attribute__((optimize("O2"))) spi_flash_read(uint32 faddr, void *des, uint32 size)
 {
 #if DEBUGSOO > 5
 	ets_printf("fread:%p<-%p[%u]\n", des, faddr, size);

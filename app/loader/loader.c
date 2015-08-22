@@ -31,7 +31,14 @@ void call_user_start(void)
 {
 	    // Загрзука заголовка flash
 	    struct SPIFlashHead fhead;
+	    // BiosROM:
+	    // QIO/80MHz:	SPI0_CTRL 0x0168a313, GPIO_MUX_CFG 0x00000205
+	    // QOUT/80MHz:	SPI0_CTRL 0x0078a313, GPIO_MUX_CFG 0x00000205
+	    // DIO/80MHz:	SPI0_CTRL 0x00e8a313, GPIO_MUX_CFG 0x00000205
+	    // DOUT/80MHz:	SPI0_CTRL 0x0068e313, GPIO_MUX_CFG 0x00000205
+
 		SPI0_USER |= SPI_CS_SETUP; // +1 такт перед CS
+
 		SPIRead(0, (uint32_t *)&fhead, sizeof(fhead));
 		// Установка размера Flash от 256Kbytes до 32Mbytes
 		// High four bits fhead.hsz.flash_size: 0 = 512K, 1 = 256K, 2 = 1M, 3 = 2M, 4 = 4M, ... 7 = 32M
